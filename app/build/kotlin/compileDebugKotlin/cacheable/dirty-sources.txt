@@ -1,0 +1,8 @@
+/home/rootp1/AndroidStudioProjects/swaraksha/app/src/main/java/com/example/myapplication/codetea.kt
+/home/rootp1/AndroidStudioProjects/swaraksha/app/src/main/java/com/example/myapplication/safetylessons.kt
+/home/rootp1/AndroidStudioProjects/swaraksha/app/src/main/java/com/example/myapplication/ui/theme/Type.kt
+/home/rootp1/AndroidStudioProjects/swaraksha/app/src/main/java/com/example/myapplication/MainActivity.kt
+/home/rootp1/AndroidStudioProjects/swaraksha/app/src/main/java/com/example/myapplication/aaaaaaa.kt
+/home/rootp1/AndroidStudioProjects/swaraksha/app/src/main/java/com/example/myapplication/aa.kt
+/home/rootp1/AndroidStudioProjects/swaraksha/app/src/main/java/com/example/myapplication/ui/theme/Color.kt
+/home/rootp1/AndroidStudioProjects/swaraksha/app/src/main/java/com/example/myapplication/ui/theme/Theme.kt
