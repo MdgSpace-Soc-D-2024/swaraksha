@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'emergency.dart';
 import 'faq.dart';
 
@@ -77,9 +78,7 @@ class SwarakshaUI extends StatelessWidget {
                 ),
                 SizedBox(height: 10),
                 ElevatedButton(
-                  onPressed: () {
-                    // Empty onPressed to ensure no navigation to SafetyLessonsPage
-                  },
+                  onPressed: () {},
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.pink[200],
                     shape: RoundedRectangleBorder(
@@ -115,10 +114,10 @@ class SwarakshaUI extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          _buildNearbyButton(Icons.local_hospital, 'Hospital'),
-                          _buildNearbyButton(Icons.local_pharmacy, 'Pharmacy'),
-                          _buildNearbyButton(Icons.person, 'Police Station'),
-                          _buildNearbyButton(Icons.directions_bus, 'Transport'),
+                          _buildNearbyButton(Icons.local_hospital, 'Hospital', 'hospital near me'),
+                          _buildNearbyButton(Icons.local_pharmacy, 'Pharmacy', 'pharmacy near me'),
+                          _buildNearbyButton(Icons.person, 'Police Station', 'police station near me'),
+                          _buildNearbyButton(Icons.directions_bus, 'Transport', 'transport near me'),
                         ],
                       ),
                     ],
@@ -156,12 +155,12 @@ class SwarakshaUI extends StatelessWidget {
     );
   }
 
-  Widget _buildNearbyButton(IconData icon, String label) {
+  Widget _buildNearbyButton(IconData icon, String label, String query) {
     return Column(
       children: [
         ElevatedButton(
           onPressed: () {
-            // Placeholder for nearby functionality if needed in the future.
+            _launchGoogleMaps(query);
           },
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.pink[200],
@@ -177,5 +176,10 @@ class SwarakshaUI extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  void _launchGoogleMaps(String query) async {
+    final url = Uri.encodeFull('https://www.google.com/maps/search/$query');
+    await launch(url);
   }
 }
