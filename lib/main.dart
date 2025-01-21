@@ -3,6 +3,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'emergency.dart';
 import 'faq.dart';
 import 'feedback.dart';
+import 'safetylessons.dart';
 
 void main() {
   runApp(MyApp());
@@ -79,7 +80,12 @@ class SwarakshaUI extends StatelessWidget {
                 ),
                 SizedBox(height: 10),
                 ElevatedButton(
-                  onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => SafetyLessonsPage()),
+                      );
+                      },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.pink[200],
                     shape: RoundedRectangleBorder(
