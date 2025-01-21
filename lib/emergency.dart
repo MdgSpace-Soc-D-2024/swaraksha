@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class EmergencyPage extends StatelessWidget {
   @override
@@ -164,7 +165,9 @@ class SOSDialog extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    _dialNumber('100');
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.grey.shade200,
                     foregroundColor: Colors.black,
@@ -172,7 +175,9 @@ class SOSDialog extends StatelessWidget {
                   child: Text('100'),
                 ),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    _dialNumber('108');
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.grey.shade200,
                     foregroundColor: Colors.black,
@@ -180,7 +185,9 @@ class SOSDialog extends StatelessWidget {
                   child: Text('108'),
                 ),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    _dialNumber('112');
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.grey.shade200,
                     foregroundColor: Colors.black,
@@ -213,5 +220,12 @@ class SOSDialog extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<void> _dialNumber(String number) async {
+    final Uri phoneUri = Uri(scheme: 'tel', path: number);
+      await launch(phoneUri.toString());
+
+
   }
 }
