@@ -85,7 +85,7 @@ class EmergencyPage extends StatelessWidget {
                 padding: EdgeInsets.all(40),
                 children: [
                   NearbyButton('FAKE CALL', Icons.phone, () {}),
-                  NearbyButton('SHARE', Icons.share, () {}),
+                  NearbyButton('SHARE LOCATION', Icons.share, () {}),
                   NearbyButton('AUTO RECORD', Icons.mic, () {}),
                   NearbyButton('TRIGGER', Icons.notification_important, () {}),
                 ],

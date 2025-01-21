@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'emergency.dart';
 import 'faq.dart';
+import 'feedback.dart';
 
 void main() {
   runApp(MyApp());
@@ -141,7 +142,12 @@ class SwarakshaUI extends StatelessWidget {
                   child: Text('FAQ'),
                 ),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => FeedbackPage()),
+                    );
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.pink[100],
                   ),
