@@ -5,19 +5,19 @@ import 'faq.dart';
 import 'feedback.dart';
 import 'safetylessons.dart';
 
-void main() {
-  runApp(MyApp());
-}
+// void main() {
+//   runApp(MyApp());
+// }
 
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: SwarakshaUI(),
-    );
-  }
-}
+// class MyApp extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       debugShowCheckedModeBanner: false,
+//       home: SwarakshaUI(),
+//     );
+//   }
+// }
 
 class SwarakshaUI extends StatelessWidget {
   @override

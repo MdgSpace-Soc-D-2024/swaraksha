@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "275508824921",
+    "project_id": "swaraksha-16739",
+    "storage_bucket": "swaraksha-16739.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:275508824921:android:b9003b198820d2cfe09a48",
+        "android_client_info": {
+          "package_name": "com.example.swaraksha"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBl0ylSD3H2OtKHJZN0bHhbWtsjjY62ScM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
