@@ -39,6 +39,8 @@ dependencies:
   cloud_firestore: ^5.6.2
   firebase_core: ^3.10.1
 
+  audioplayers: ^6.1.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -69,6 +71,8 @@ flutter:
     - assets/images/image3.png
     - assets/images/image4.png
     - assets/images/image5.png
+
+    - assets/audios/buzz.wav
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

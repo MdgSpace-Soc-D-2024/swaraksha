@@ -1,7 +1,48 @@
 import 'package:flutter/material.dart';
+import 'package:audioplayers/audioplayers.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class EmergencyPage extends StatelessWidget {
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: EmergencyPage(),
+    );
+  }
+}
+
+class EmergencyPage extends StatefulWidget {
+  @override
+  _EmergencyPageState createState() => _EmergencyPageState();
+}
+
+class _EmergencyPageState extends State<EmergencyPage> {
+  AudioPlayer _audioPlayer = AudioPlayer();
+  bool _isPlaying = false;
+
+  void _toggleMusic() async {
+    if (_isPlaying) {
+      await _audioPlayer.stop();
+    } else {
+      await _audioPlayer.setSource(AssetSource('audios/buzz.wav'));
+      _audioPlayer.setReleaseMode(ReleaseMode.loop);
+      await _audioPlayer.play(AssetSource('audios/buzz.wav'));
+    }
+    setState(() {
+      _isPlaying = !_isPlaying;
+    });
+  }
+
+  @override
+  void dispose() {
+    _audioPlayer.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -87,7 +128,12 @@ class EmergencyPage extends StatelessWidget {
                   NearbyButton('FAKE CALL', Icons.phone, () {}),
                   NearbyButton('SHARE LOCATION', Icons.share, () {}),
                   NearbyButton('AUTO RECORD', Icons.mic, () {}),
-                  NearbyButton('TRIGGER', Icons.notification_important, () {}),
+                  NearbyButton(
+                    'TRIGGER',
+                    Icons.notification_important,
+                    _toggleMusic,
+                    color: _isPlaying ? Colors.pink[700] : Colors.pink[300],
+                  ),
                 ],
               ),
             ),
@@ -97,11 +143,11 @@ class EmergencyPage extends StatelessWidget {
     );
   }
 
-  Widget NearbyButton(String label, IconData icon, VoidCallback onPressed) {
+  Widget NearbyButton(String label, IconData icon, VoidCallback onPressed, {Color? color}) {
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.pink[300],
+        backgroundColor: color ?? Colors.pink[300],
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30),
         ),
@@ -224,8 +270,6 @@ class SOSDialog extends StatelessWidget {
 
   Future<void> _dialNumber(String number) async {
     final Uri phoneUri = Uri(scheme: 'tel', path: number);
-      await launch(phoneUri.toString());
-
-
+    await launch(phoneUri.toString());
   }
 }

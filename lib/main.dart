@@ -4,6 +4,7 @@ import 'emergency.dart';
 import 'faq.dart';
 import 'feedback.dart';
 import 'safetylessons.dart';
+import 'gc.dart';
 
 // void main() {
 //   runApp(MyApp());
@@ -65,13 +66,13 @@ class SwarakshaUI extends StatelessWidget {
                     );
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.pink[300],
+                    backgroundColor: Colors.pink[400],
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20),
                     ),
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+                    padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 30),
                     child: Text(
                       ' Emergency ',
                       style: TextStyle(fontSize: 33, fontWeight: FontWeight.bold),
@@ -79,7 +80,32 @@ class SwarakshaUI extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 10),
-                ElevatedButton(
+                    ElevatedButton(
+                    onPressed: () {
+                    Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Swak()),
+                    );
+                    },
+                    style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.pink[200],
+                    shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                    ),
+                    ),
+
+                    child:
+                    Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 40),
+                    child: Text(
+                    'Safe Chat',
+                    style: TextStyle(fontSize: 32, fontWeight: FontWeight.w500),
+                    ),
+                    ),
+
+                    ),
+                SizedBox(height: 10),
+                  ElevatedButton(
                     onPressed: () {
                       Navigator.push(
                       context,
@@ -87,13 +113,13 @@ class SwarakshaUI extends StatelessWidget {
                       );
                       },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.pink[200],
+                    backgroundColor: Colors.pink[300],
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20),
                     ),
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 30),
+                    padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 30),
                     child: Text(
                       'Safety Lessons',
                       style: TextStyle(fontSize: 32, fontWeight: FontWeight.w500),
