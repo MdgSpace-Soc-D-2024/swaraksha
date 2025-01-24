@@ -74,6 +74,9 @@ flutter:
 
     - assets/audios/buzz.wav
 
+    - assets/images/fakecallgradient.jpg
+    - assets/images/fakecall.png
+    - assets/images/fakecallgradient1.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

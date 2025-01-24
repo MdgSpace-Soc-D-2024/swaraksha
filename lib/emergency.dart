@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'fakecall.dart';
 
 void main() {
   runApp(MyApp());
@@ -125,7 +126,17 @@ class _EmergencyPageState extends State<EmergencyPage> {
                 crossAxisSpacing: 20,
                 padding: EdgeInsets.all(40),
                 children: [
-                  NearbyButton('FAKE CALL', Icons.phone, () {}),
+                  NearbyButton(
+                      'FAKE CALL',
+                      Icons.phone,
+                          () {
+                        // Navigate to the fake call screen
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => CallScreen()),
+                        );
+                      }
+                  ),
                   NearbyButton('SHARE LOCATION', Icons.share, () {}),
                   NearbyButton('AUTO RECORD', Icons.mic, () {}),
                   NearbyButton(
