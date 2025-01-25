@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-
+import 'package:firebase_database/firebase_database.dart';
 
 class FeedbackApp extends StatelessWidget {
   @override
@@ -26,20 +25,48 @@ class _FeedbackPageState extends State<FeedbackPage> {
   TextEditingController feedbackController = TextEditingController();
   TextEditingController suggestionController = TextEditingController();
 
+  final DatabaseReference _databaseRef = FirebaseDatabase.instance.ref(); // Updated line
+
+  void _submitFeedback() {
+    String feedback = feedbackController.text;
+    String suggestion = suggestionController.text;
+
+    Map<String, dynamic> feedbackData = {
+      'overallRating': overallRating,
+      'easeOfUseRating': easeOfUseRating,
+      'safetyRating': safetyRating,
+      'designRating': designRating,
+      'feedback': feedback,
+      'suggestion': suggestion,
+      'timestamp': ServerValue.timestamp,
+    };
+
+    _databaseRef.child('feedbacks').push().set(feedbackData).then((_) {
+      print('Feedback submitted successfully!');
+      feedbackController.clear();
+      suggestionController.clear();
+      setState(() {
+        overallRating = 0;
+        easeOfUseRating = 0;
+        safetyRating = 0;
+        designRating = 0;
+      });
+    }).catchError((error) {
+      print('Failed to submit feedback: $error');
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.pink[50],
       appBar: AppBar(
         title: Text(
-          '   Give Us a Rating',
+          'Give Us a Rating',
           style: TextStyle(color: Colors.black),
         ),
         backgroundColor: Colors.pink[200],
         actions: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10.0),
-          ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 40.0),
             child: Image.asset(
@@ -126,26 +153,7 @@ class _FeedbackPageState extends State<FeedbackPage> {
             SizedBox(height: 40),
             Center(
               child: ElevatedButton(
-                onPressed: () {
-                  String feedback = feedbackController.text;
-                  String suggestion = suggestionController.text;
-
-                  print('Overall Rating: $overallRating');
-                  print('Ease of Use Rating: $easeOfUseRating');
-                  print('Safety Rating: $safetyRating');
-                  print('Design Rating: $designRating');
-                  print('Feedback: $feedback');
-                  print('Suggestion: $suggestion');
-
-                  feedbackController.clear();
-                  suggestionController.clear();
-                  setState(() {
-                    overallRating = 0;
-                    easeOfUseRating = 0;
-                    safetyRating = 0;
-                    designRating = 0;
-                  });
-                },
+                onPressed: _submitFeedback,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.pink[300],
                   padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
