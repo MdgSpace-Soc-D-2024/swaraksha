@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:audioplayers/audioplayers.dart';
 import 'emergency.dart';
 import 'fakecalllift.dart';
 
-
 class CallScreen extends StatelessWidget {
+  final AudioPlayer audioPlayer;
+
+  CallScreen({required this.audioPlayer});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,6 +68,7 @@ class CallScreen extends StatelessWidget {
                     width: 70,
                     child: FloatingActionButton(
                       onPressed: () {
+                        audioPlayer.stop();
                         Navigator.push(
                           context,
                           MaterialPageRoute(builder: (context) => MyApp()),
@@ -79,6 +84,7 @@ class CallScreen extends StatelessWidget {
                     width: 70,
                     child: FloatingActionButton(
                       onPressed: () {
+                        audioPlayer.stop();
                         Navigator.push(
                           context,
                           MaterialPageRoute(builder: (context) => CallLift()),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:share_plus/share_plus.dart';
 import 'fakecall.dart';
 
 void main() {
@@ -36,6 +38,43 @@ class _EmergencyPageState extends State<EmergencyPage> {
     setState(() {
       _isPlaying = !_isPlaying;
     });
+  }
+
+  void _toggleRingtone() async {
+    if (_isPlaying) {
+      await _audioPlayer.stop();
+    } else {
+      await _audioPlayer.setSource(AssetSource('audios/ringtone.mp3'));
+      _audioPlayer.setReleaseMode(ReleaseMode.loop);
+      await _audioPlayer.play(AssetSource('audios/ringtone.mp3'));
+    }
+    setState(() {
+      _isPlaying = !_isPlaying;
+    });
+  }
+
+  Future<void> _shareLocation() async {
+    try {
+      LocationPermission permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Location permission denied')),
+        );
+        return;
+      }
+
+      Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high,
+      );
+
+      String message = 'My current location is: https://www.google.com/maps/search/?api=1&query=${position.latitude},${position.longitude}';
+
+      await Share.share(message);
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error sharing location: $e')),
+      );
+    }
   }
 
   @override
@@ -130,14 +169,14 @@ class _EmergencyPageState extends State<EmergencyPage> {
                       'FAKE CALL',
                       Icons.phone,
                           () {
-                        // Navigate to the fake call screen
+                        _toggleRingtone();
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => CallScreen()),
+                          MaterialPageRoute(builder: (context) => CallScreen(audioPlayer: _audioPlayer)),
                         );
                       }
                   ),
-                  NearbyButton('SHARE LOCATION', Icons.share, () {}),
+                  NearbyButton('SHARE LOCATION', Icons.share, _shareLocation),
                   NearbyButton('AUTO RECORD', Icons.mic, () {}),
                   NearbyButton(
                     'TRIGGER',
@@ -265,7 +304,18 @@ class SOSDialog extends StatelessWidget {
             ),
             SizedBox(height: 12),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () async {
+                const String favoritesDeepLink = 'content://com.android.contacts/contacts/favorites';
+                final Uri uri = Uri.parse(favoritesDeepLink);
+
+                if (await canLaunch(uri.toString())) {
+                  await launch(uri.toString());
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('Could not open Google Contacts')),
+                  );
+                }
+              },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.grey.shade300,
                 foregroundColor: Colors.black,
