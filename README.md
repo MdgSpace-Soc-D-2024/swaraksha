@@ -1,5 +1,5 @@
-please note that vivek is not the contributor for this repository, we both were making project from same device, due to his laptop's compatabilty issues, I hope you understand
-demo video and apk are added to this 
+
+demo video and apk
 [link](https://drive.google.com/drive/folders/1tcF9kYTPuwpuDDW6c6MZRZdIHEJvh25J?usp=drive_link)
 
 this submission is being made for 
